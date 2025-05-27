@@ -1,13 +1,21 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Scanner;
 
 public class App {
+
+    static Scanner scanner = new Scanner(System.in);
     
-    public static void instance1(){
+    public static Bicicleta instance1(){
         Bicicleta bike1 = new Bicicleta("Triban", "Gravel12", 90, true, false);
 
         System.out.println(bike1.toString());
+
+        return bike1;
+    }
+
+    public static void showBrandVel(Bicicleta bike){
+        System.err.println("Marca: " + bike.getMarca());
+        System.out.println("Velocidad Máxima: " + bike.getVelMax());
     }
     
     public static void instance2(){
@@ -22,8 +30,10 @@ public class App {
         System.out.println(bike2.toString());
     }
 
+
+
     public static void instanceArray(){
-        Scanner scanner = new Scanner(System.in);
+
         ArrayList<Bicicleta> bicicletas = new ArrayList<>();
 
         System.out.print("Ingresa el número de bicicletas a crear ?\n");
@@ -53,7 +63,6 @@ public class App {
 
             
         }
-        scanner.close();
 
         bikeShow(bicicletas);
     }
@@ -67,13 +76,59 @@ public class App {
 
 
     }
+
+    public static void menu(){
+
+        boolean quitProgram = false;
+    
+
+        do {
+
+             System.out.println("Escribe el número de opción\n 1.- Ver bicicleta\n 2.- Ver Bicicleta \n 3.- Ver Velocidad y Marca bicicleta 1\n 4.- Agregar y ver bicicletas ");
+            int optionKey = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (optionKey) {
+                case 1:
+                    instance1();
+                    break;
+                case 2:
+                    instance2();
+                    break;
+                case 3:
+                    Bicicleta bike = instance1(); 
+                    showBrandVel(bike);
+                    break;
+                case 4:
+                    instanceArray();
+                    break; 
+                default:
+                    break;
+
+            
+            }
+
+            System.out.println("Deseas continuar si/no");
+            String stringContinue = scanner.nextLine();
+            
+            if (stringContinue.equalsIgnoreCase("no")){
+                quitProgram = true;
+            
+            }
+        } while (!quitProgram);
+
+        
+
+        scanner.close();
+    }
     
     public static void main(String[] args) throws Exception {
         
-        instance1();        
-        instance2();
-        instanceArray();
+                menu();
+        
+        
 
 
     }
+
 }
